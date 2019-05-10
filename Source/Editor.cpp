@@ -13,7 +13,7 @@ int main(int, char*[])
 
 	//create the window
 	WindowParameters windowParams;
-	windowParams.type = WindowType::WINDOWED;
+	windowParams.type = WindowType::BORDERLESS;
 	windowParams.title = "Main";
 	windowParams.monitor = 0;
 	windowParams.pixelPosition.x = 0;
@@ -22,8 +22,6 @@ int main(int, char*[])
 	windowParams.pixelSize.y = 512;
 
 	app.CreateWindow(windowParams);
-
-	//Window* mainWindow = CreateWindow(singleWindowType, "main", monitor, xPos, yPos, xSize, ySize);
 
 	//SetWindowLayout(mainWindow, new SingleLayout(new RenderWidget()));
 
