@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.13.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14.1 FATAL_ERROR)
 
 #Set CMake tools location
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/Tools/CMake)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Tools/CMake)
 
 
 ##############################################
@@ -25,8 +25,6 @@ conan_cmake_run(CONANFILE Tools/Conan/conanfile.txt
                 BASIC_SETUP CMAKE_TARGETS
                 BUILD missing)
 
-#TODO: replace with Conan workspaces
-#Engine path
 add_subdirectory(${CONAN_USER_SOULENGINE_ENGINE_PATH} ${CONAN_USER_SOULENGINE_ENGINE_PATH}/Build)
 
 
@@ -51,10 +49,11 @@ target_link_libraries(${PROJECT_NAME}
 ##############################################
 #Sources
 
+file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS Source/*)
+
 target_sources(${PROJECT_NAME}
     PRIVATE
-        Source/Editor.cpp
-        Source/Editor.h
+        ${SOURCES}
 )
 
 #Provides Visual Studio filter support
