@@ -12,5 +12,6 @@ Modules/*
 Resources/Objects/*
 Resources/Textures/*
 
-#Misc
-*.junk
+#Python
+*.egg-info
+*.pyc

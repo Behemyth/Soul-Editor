@@ -1,8 +1,12 @@
-cmake_minimum_required(VERSION 3.14.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.15.2  FATAL_ERROR)
 
 #Set CMake tools location
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/Tools/CMake)
 
+#Global Options
+set(CMAKE_FIND_PACKAGE_PREFER_CONFIG ON)# Opposite module/PCF order for `find_package`
+
+include(${CMAKE_BINARY_DIR}/conan_paths.cmake)
 
 ##############################################
 #Project 
@@ -17,15 +21,7 @@ project(SoulEditor
 ##############################################
 #Dependencies
 
-#TODO: Pull Engine from Conan remote and use that as a dependancy if an editable package is not found
-#Conan via CMake
-include(${CMAKE_SOURCE_DIR}/Tools/Conan/conan.cmake)
-
-conan_cmake_run(CONANFILE Tools/Conan/conanfile.txt
-                BASIC_SETUP CMAKE_TARGETS
-                BUILD missing)
-
-add_subdirectory(${CONAN_USER_SOULENGINE_ENGINE_PATH} ${CONAN_USER_SOULENGINE_ENGINE_PATH}/Build)
+find_package("SoulEngine")
 
 
 ##############################################
@@ -37,13 +33,13 @@ set_target_properties(${PROJECT_NAME}
     PROPERTIES 
         LINKER_LANGUAGE CXX
         CXX_EXTENSIONS OFF  
-        CXX_STANDARD 17
+        CXX_STANDARD 20
         USE_FOLDERS ON
 )
 
 target_link_libraries(${PROJECT_NAME}
     PUBLIC
-		CONAN_PKG::SoulEngine
+        synodic::SoulEngine
 )
 
 ##############################################

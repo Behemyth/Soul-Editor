@@ -2,4 +2,5 @@
 SoulEngine/0.0.1@synodic/testing
 
 [generators]
-cmake
+cmake_find_package_multi
+cmake_paths
