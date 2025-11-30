@@ -15,3 +15,4 @@ Resources/Textures/*
 #Python
 *.egg-info
 *.pyc
+/dist
